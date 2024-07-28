@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">TING-MACHINE</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAb97JadeOBE2QIt0DQ8M+UwAAAAACAAAAAAAQZgAAAAEAACAAAAA4M9QUVZnGAdClCxhbSefxpYLRwnoT/9SA6pVS4WR8dAAAAAAOgAAAAAIAACAAAAA1pzjiw3f05wzGyJvRPxKr6fcR/JcS97Vj26ErrBNYBpAAAADixBxiDLKFdh8MyaeZlhHtZwUNztuuewRKQppM4I5vG4eHuK5UqxkxedI62flDkc9UEKTikq66hUJs4ppLU3+S+Jd5LSRtENAzLEijYwzn78Z51H2eA+srHK5r+BvDfbIUwzk6BI/KmnmLDu+EqF0SyCFRY8kNLtHget8HblEc62nPikjwik0sJM1qGS+mmKtAAAAA6QUaDT0Q900jZq46QA1+Rf3lO1JN9GwVllSUvxTy1tlubdjBbHc6eNuAt3xW5bKCGo75dFQbgqwdF+nCtbRI4g==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAb97JadeOBE2QIt0DQ8M+UwAAAAACAAAAAAAQZgAAAAEAACAAAADR4J2WwJwrPyv0vqjLou75UbI1PmtRvxNv2vpkmlf7PgAAAAAOgAAAAAIAACAAAAB/3NOXA/e+S1kpbskXkiqj0yCo+YizMZ75J942thfd8ZAAAAAKAiGEvORtBOo0sLKvTw1Na/Nr+fmUF11wBDvvhbKKD9jMdmey0l8VFj3fV+wmQau5U1W07R1pboIiy7Ov+tKpZxh404ExfF7GCizmt1bh40wKlyIQC4wNl4QwTj0A8tNOL8hWQDWoUNtkgdGjXqzmj4dlIvmQFQh0wm2O5iX1JsK5SayFM3lnQOVgG2DLyWFAAAAA8udyG5nB0cgEnmJvo2xm2NIURFQmtIAt8Xutnkiv94EhC2lEoeSLBA/b3KG1+vQ6kxXDI1CWfG7Tbz6kEMmTbA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -42,10 +42,10 @@
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">9</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">12</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{87706A43-D4CA-49F9-BAA3-EDF0C6ECBB90}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{2EE9F4B7-3FF0-4860-BCF1-D7C5C2BD4C42}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -78,7 +78,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Ting\Downloads\SSIS-ETL-Takehome.xlsx;Extended Properties="Excel 12.0 XML;HDR=YES";</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Ting\Downloads\SSIS-ETL-Takehome.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
