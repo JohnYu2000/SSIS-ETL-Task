@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">TING-MACHINE</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAb97JadeOBE2QIt0DQ8M+UwAAAAACAAAAAAAQZgAAAAEAACAAAADR4J2WwJwrPyv0vqjLou75UbI1PmtRvxNv2vpkmlf7PgAAAAAOgAAAAAIAACAAAAB/3NOXA/e+S1kpbskXkiqj0yCo+YizMZ75J942thfd8ZAAAAAKAiGEvORtBOo0sLKvTw1Na/Nr+fmUF11wBDvvhbKKD9jMdmey0l8VFj3fV+wmQau5U1W07R1pboIiy7Ov+tKpZxh404ExfF7GCizmt1bh40wKlyIQC4wNl4QwTj0A8tNOL8hWQDWoUNtkgdGjXqzmj4dlIvmQFQh0wm2O5iX1JsK5SayFM3lnQOVgG2DLyWFAAAAA8udyG5nB0cgEnmJvo2xm2NIURFQmtIAt8Xutnkiv94EhC2lEoeSLBA/b3KG1+vQ6kxXDI1CWfG7Tbz6kEMmTbA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAb97JadeOBE2QIt0DQ8M+UwAAAAACAAAAAAAQZgAAAAEAACAAAAAwbJC1apZlMPMJA+avHOoxczr8NppqMRc4GZ2Yk7fuCAAAAAAOgAAAAAIAACAAAADJla9sjOJia3Zd5itTIZbWKI0BTEeQlJmCXbCi4iu5vJAAAACFNISUgS/Sk5we+dPPAanc1iu4uoiI+iDltwyXfB3wHDaawo+7usqb5SKhwVJ/o53h5kfg1GBSiGAoU/fP88OgaXkjTF3fn1QQBptc1nQwOqbvnoEf+6zBEd3LuDxJ231lNEHLNEL2jG+CztUfhXcZcTxBwQk4KulmPudIL3mb2w+7G5h8wjPhufxOM4VKOl1AAAAA1SknGcHqQpoTAHzcaxpDNub7YHWXUQr8BVxShmYXAbpSIhyrNjEVwD4ejockvIxGBk+IthUBRM+JZG0VClxEsA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -42,10 +42,10 @@
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">12</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">19</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{2EE9F4B7-3FF0-4860-BCF1-D7C5C2BD4C42}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{8D55CC72-751F-46DC-B55B-8D38A803F189}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -78,7 +78,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Ting\Downloads\SSIS-ETL-Takehome.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Ting\Downloads\SSIS-ETL-Task\input.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -93,7 +93,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">C:\Ting\Downloads\SSIS-ETL-Takehome.xlsx</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">C:\Ting\Downloads\SSIS-ETL-Task\input.xlsx</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -166,7 +166,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">C:\Ting\Downloads\SSIS-ETL-Takehome.xlsx</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">C:\Ting\Downloads\SSIS-ETL-Task\input.xlsx</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
