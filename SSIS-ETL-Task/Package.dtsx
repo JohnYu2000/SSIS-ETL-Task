@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/27/2024 7:58:00 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="TING-MACHINE"
+  DTS:CreatorName="TING-MACHINE\david"
+  DTS:DTSID="{073817A1-596C-4343-8DCD-FA4344374D8A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="4105"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionGUID="{263F24E8-5DE8-4A1A-A738-1AB253041935}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>
