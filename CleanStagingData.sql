@@ -36,7 +36,7 @@ BEGIN
 	WHERE StgID IN (SELECT StgID FROM CTE_Duplicates WHERE RowNum > 1);
 
 	-- Isolate records with null values in non-nullable fields.
-	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal, ErrorDescription)
+	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
 	SELECT
 		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
 	FROM
