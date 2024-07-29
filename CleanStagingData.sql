@@ -75,17 +75,97 @@ BEGIN
 		FullName LIKE '%[^a-zA-Z0-9 ]%'
 		OR Email LIKE '%[^a-zA-Z0-9@._-]%';
 
-	-- Isolate recordsd with future dates
+	-- Isolate records with future dates
 	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
 	SELECT
 		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
 	FROM
 		stg.Users
 	WHERE
-		RegistrationDate > GETDATE();
+		RegistrationDate > GETDATE()
+		OR LastLoginDate > GETDATE()
+		OR RegistrationDate > LastLoginDate;
 
 	DELETE FROM stg.Users
 	WHERE
-		RegistrationDate > GETDATE();
+		RegistrationDate > GETDATE()
+		OR LastLoginDate > GETDATE()
+		OR RegistrationDate > LastLoginDate;
+
+	-- Isolate records with negative age
+	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
+	SELECT
+		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
+	FROM
+		stg.Users
+	WHERE
+		Age < 0;
+
+	DELETE FROM stg.Users
+	WHERE
+		Age < 0;
+
+	-- Isolate records with invalid email format
+	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
+	SELECT
+		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
+	FROM
+		stg.Users
+	WHERE
+		Email NOT LIKE '%_@__%.__%';
+
+	DELETE FROM stg.Users
+	WHERE
+		Email NOT LIKE '%_@__%.__%';
+
+	-- Isolate records with very old dates (over 100 years old)
+	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
+	SELECT
+		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
+	FROM
+		stg.Users
+	WHERE
+		RegistrationDate < DATEADD(YEAR, -100, GETDATE())
+		OR LastLoginDate < DATEADD(YEAR, -100, GETDATE());
+
+	DELETE FROM stg.Users
+	WHERE
+		RegistrationDate < DATEADD(YEAR, -100, GETDATE())
+		OR LastLoginDate < DATEADD(YEAR, -100, GETDATE());
+
+	-- Isolate records with outlier PurchaseTotals
+	DECLARE
+		@Q1 FLOAT,
+		@Q3 FLOAT,
+		@IQR FLOAT,
+		@LowerLimit FLOAT,
+		@UpperLimit FLOAT;
+
+	-- Calculate the first quartile (Q1)
+	SELECT @Q1 = PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY PurchaseTotal) OVER ()
+	FROM stg.Users;
+
+	-- Calculate the third quartile (Q3)
+	SELECT @Q3 = PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY PurchaseTotal) OVER ()
+	FROM stg.Users;
+
+	-- Calculate the IQR
+	SET @IQR = @Q3 - @Q1;
+
+	-- Calculate the lower and upper limits
+	SET @LowerLimit = @Q1 - 1.5 * @IQR;
+	SET @UpperLimit = @Q3 + 1.5 * @IQR;
+
+	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
+	SELECT
+		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
+	FROM
+		stg.Users
+	WHERE
+		PurchaseTotal < @LowerLimit OR PurchaseTotal > @UpperLimit;
+
+	DELETE FROM stg.Users
+	WHERE
+		PurchaseTotal < @LowerLimit OR PurchaseTotal > @UpperLimit;
 END
 GO
