@@ -59,5 +59,33 @@ BEGIN
 		OR RegistrationDate IS NULL
 		OR LastLoginDate IS NULL
 		OR PurchaseTotal IS NULL;
+
+	-- Isolate records with special characters in FullName or Email
+	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
+	SELECT
+		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
+	FROM
+		stg.Users
+	WHERE
+		FullName LIKE '%[^a-zA-Z0-9 ]%'
+		OR Email LIKE '%[^a-zA-Z0-9@._-]%';
+
+	DELETE FROM stg.Users
+	WHERE
+		FullName LIKE '%[^a-zA-Z0-9 ]%'
+		OR Email LIKE '%[^a-zA-Z0-9@._-]%';
+
+	-- Isolate recordsd with future dates
+	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
+	SELECT
+		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
+	FROM
+		stg.Users
+	WHERE
+		RegistrationDate > GETDATE();
+
+	DELETE FROM stg.Users
+	WHERE
+		RegistrationDate > GETDATE();
 END
 GO
