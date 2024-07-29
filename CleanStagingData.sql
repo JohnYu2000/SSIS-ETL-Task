@@ -35,105 +35,6 @@ BEGIN
 	DELETE FROM stg.Users
 	WHERE StgID IN (SELECT StgID FROM CTE_Duplicates WHERE RowNum > 1);
 
-	-- Isolate records with null values in non-nullable fields.
-	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
-	SELECT
-		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
-	FROM
-		stg.Users
-	WHERE
-		UserID IS NULL
-		OR FullName IS NULL
-		OR Age IS NULL
-		OR Email IS NULL
-		OR RegistrationDate IS NULL
-		OR LastLoginDate IS NULL
-		OR PurchaseTotal IS NULL;
-	
-	DELETE FROM stg.Users
-	WHERE
-		UserID IS NULL
-		OR FullName IS NULL
-		OR Age IS NULL
-		OR Email IS NULL
-		OR RegistrationDate IS NULL
-		OR LastLoginDate IS NULL
-		OR PurchaseTotal IS NULL;
-
-	-- Isolate records with special characters in FullName or Email
-	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
-	SELECT
-		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
-	FROM
-		stg.Users
-	WHERE
-		FullName LIKE '%[^a-zA-Z0-9 ]%'
-		OR Email LIKE '%[^a-zA-Z0-9@._-]%';
-
-	DELETE FROM stg.Users
-	WHERE
-		FullName LIKE '%[^a-zA-Z0-9 ]%'
-		OR Email LIKE '%[^a-zA-Z0-9@._-]%';
-
-	-- Isolate records with future dates
-	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
-	SELECT
-		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
-	FROM
-		stg.Users
-	WHERE
-		RegistrationDate > GETDATE()
-		OR LastLoginDate > GETDATE()
-		OR RegistrationDate > LastLoginDate;
-
-	DELETE FROM stg.Users
-	WHERE
-		RegistrationDate > GETDATE()
-		OR LastLoginDate > GETDATE()
-		OR RegistrationDate > LastLoginDate;
-
-	-- Isolate records with negative age
-	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
-	SELECT
-		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
-	FROM
-		stg.Users
-	WHERE
-		Age < 0;
-
-	DELETE FROM stg.Users
-	WHERE
-		Age < 0;
-
-	-- Isolate records with invalid email format
-	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
-	SELECT
-		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
-	FROM
-		stg.Users
-	WHERE
-		Email NOT LIKE '%_@__%.__%';
-
-	DELETE FROM stg.Users
-	WHERE
-		Email NOT LIKE '%_@__%.__%';
-
-	-- Isolate records with very old dates (over 100 years old)
-	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
-	SELECT
-		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
-	FROM
-		stg.Users
-	WHERE
-		RegistrationDate < DATEADD(YEAR, -100, GETDATE())
-		OR LastLoginDate < DATEADD(YEAR, -100, GETDATE());
-
-	DELETE FROM stg.Users
-	WHERE
-		RegistrationDate < DATEADD(YEAR, -100, GETDATE())
-		OR LastLoginDate < DATEADD(YEAR, -100, GETDATE());
-
-	-- Isolate records with outlier PurchaseTotals
 	DECLARE
 		@Q1 FLOAT,
 		@Q3 FLOAT,
@@ -156,16 +57,69 @@ BEGIN
 	SET @LowerLimit = @Q1 - 1.5 * @IQR;
 	SET @UpperLimit = @Q3 + 1.5 * @IQR;
 
+	-- Insert records to Errors Table
 	INSERT INTO stg.Errors (StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal)
 	SELECT
 		StgID, UserID, FullName, Age, Email, RegistrationDate, LastLoginDate, PurchaseTotal
-	FROM
-		stg.Users
+	FROM stg.Users
 	WHERE
-		PurchaseTotal < @LowerLimit OR PurchaseTotal > @UpperLimit;
+		-- Add records with null values.
+		UserID IS NULL
+		OR FullName IS NULL
+		OR Age IS NULL
+		OR Email IS NULL
+		OR RegistrationDate IS NULL
+		OR LastLoginDate IS NULL
+		OR PurchaseTotal IS NULL
+		-- Add records with special characters.
+		OR FullName LIKE '%[^a-zA-Z0-9 ]%'
+		OR Email LIKE '%[^a-zA-Z0-9@._-]%'
+		-- Add records with future dates.
+		OR RegistrationDate > GETDATE()
+		OR LastLoginDate > GETDATE()
+		OR RegistrationDate > LastLoginDate
+		-- Add records with negative values.
+		OR UserID < 0
+		OR Age < 0
+		OR PurchaseTotal < 0
+		-- Add records with invalid email format.
+		OR Email NOT LIKE '%_@__%.__%'
+		-- Add records with very old dates.
+		OR RegistrationDate < DATEADD(YEAR, -100, GETDATE())
+		OR LastLoginDate < DATEADD(YEAR, -100, GETDATE())
+		-- Add records with outlier purchase totals.
+		OR PurchaseTotal < @LowerLimit
+		OR PurchaseTotal > @UpperLimit;
 
+	-- DELETE records with Staging Table
 	DELETE FROM stg.Users
 	WHERE
-		PurchaseTotal < @LowerLimit OR PurchaseTotal > @UpperLimit;
+		-- Remove records with null values.
+		UserID IS NULL
+		OR FullName IS NULL
+		OR Age IS NULL
+		OR Email IS NULL
+		OR RegistrationDate IS NULL
+		OR LastLoginDate IS NULL
+		OR PurchaseTotal IS NULL
+		-- Remove records with special characters.
+		OR FullName LIKE '%[^a-zA-Z0-9 ]%'
+		OR Email LIKE '%[^a-zA-Z0-9@._-]%'
+		-- Remove records with future dates.
+		OR RegistrationDate > GETDATE()
+		OR LastLoginDate > GETDATE()
+		OR RegistrationDate > LastLoginDate
+		-- Remove records with negative values.
+		OR UserID < 0
+		OR Age < 0
+		OR PurchaseTotal < 0
+		-- Remove records with invalid email format.
+		OR Email NOT LIKE '%_@__%.__%'
+		-- Remove records with very old dates.
+		OR RegistrationDate < DATEADD(YEAR, -100, GETDATE())
+		OR LastLoginDate < DATEADD(YEAR, -100, GETDATE())
+		-- Remove records with outlier purchase totals.
+		OR PurchaseTotal < @LowerLimit
+		OR PurchaseTotal > @UpperLimit;
 END
 GO

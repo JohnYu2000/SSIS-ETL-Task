@@ -11,8 +11,8 @@
   DTS:LocaleID="4105"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="39"
-  DTS:VersionGUID="{D28904DB-C714-4482-9547-6F84336EB81B}">
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{C8C56157-4CC3-4E9D-995B-E646F375EFA6}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1625,6 +1625,10 @@ WHERE UserID = ?;</property>
           Size="236,42.6666666666667"
           Id="Package\Extract and Load Data to Staging"
           TopLeft="116.87499477528,110.842104046133" />
+        <NodeLayout
+          Size="228,42.6666666666667"
+          Id="Package\Incremental Load to Production"
+          TopLeft="121.249994579703,291.473681010203" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="237.24999390915,153.5087707128">
@@ -1647,17 +1651,6 @@ WHERE UserID = ?;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <AnnotationLayout
-          Text=""
-          ParentId="Package"
-          FontInfo="{assembly:Null}"
-          Size="29.3333333333334,40"
-          Id="333ef706-8c2f-4e10-973a-0a852a6c4e86"
-          TopLeft="5.5,5.5" />
-        <NodeLayout
-          Size="228,42.6666666666667"
-          Id="Package\Incremental Load to Production"
-          TopLeft="121.249994579703,291.473681010203" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="237.437493811361,245.192980232442">
@@ -1680,6 +1673,13 @@ WHERE UserID = ?;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <AnnotationLayout
+          Text=""
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="29.3333333333334,40"
+          Id="333ef706-8c2f-4e10-973a-0a852a6c4e86"
+          TopLeft="5.5,5.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1770,75 +1770,17 @@ WHERE UserID = ?;</property>
           Id="Package\Incremental Load to Production\OLE DB Source"
           TopLeft="306.999990850687,88.9999973475934" />
         <NodeLayout
+          Size="196.666666666667,42.6666666666667"
+          Id="Package\Incremental Load to Production\Update Existing Records"
+          TopLeft="185.384609859724,354.102555001394" />
+        <NodeLayout
           Size="193.333333333334,42.6666666666667"
           Id="Package\Incremental Load to Production\Check Existing Records"
           TopLeft="288.181809593331,220.909084325487" />
-        <EdgeLayout
-          Id="Package\Incremental Load to Production.Paths[OLE DB Source Output]"
-          TopLeft="384.590900222009,131.66666401426">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,89.2424203112271"
-              Start="0,0"
-              End="0,81.7424203112271">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,81.7424203112271" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
           Size="173.333333333334,42.6666666666667"
           Id="Package\Incremental Load to Production\Insert New Records"
           TopLeft="466.923063007685,359.230758524858" />
-        <EdgeLayout
-          Id="Package\Incremental Load to Production.Paths[Lookup No Match Output]"
-          TopLeft="384.848476259998,263.575750992154">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="168.741253414354,95.6550075327045"
-              Start="0,0"
-              End="168.741253414354,88.1550075327045">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,43.8275037663523" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,43.8275037663523"
-                    Point2="0,47.8275037663523"
-                    Point3="4,47.8275037663523" />
-                  <mssgle:LineSegment
-                    End="164.741253414354,47.8275037663523" />
-                  <mssgle:CubicBezierSegment
-                    Point1="164.741253414354,47.8275037663523"
-                    Point2="168.741253414354,47.8275037663523"
-                    Point3="168.741253414354,51.8275037663523" />
-                  <mssgle:LineSegment
-                    End="168.741253414354,88.1550075327045" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="28.5642399884272,52.8275037663523,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="196.666666666667,42.6666666666667"
-          Id="Package\Incremental Load to Production\Update Existing Records"
-          TopLeft="185.384609859724,354.102555001394" />
         <EdgeLayout
           Id="Package\Incremental Load to Production.Paths[Lookup Match Output]"
           TopLeft="353.959587371109,263.575750992154">
@@ -1875,6 +1817,66 @@ WHERE UserID = ?;</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Incremental Load to Production.Paths[OLE DB Source Output]"
+          TopLeft="384.590900222009,131.66666401426">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,89.2424203112271"
+              Start="0,0"
+              End="0,81.7424203112271">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,81.7424203112271" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Incremental Load to Production.Paths[Lookup No Match Output]"
+          TopLeft="384.848476259998,263.575750992154">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="168.741253414354,95.6550075327045"
+              Start="0,0"
+              End="168.741253414354,88.1550075327045">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.8275037663523" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.8275037663523"
+                    Point2="0,47.8275037663523"
+                    Point3="4,47.8275037663523" />
+                  <mssgle:LineSegment
+                    End="164.741253414354,47.8275037663523" />
+                  <mssgle:CubicBezierSegment
+                    Point1="164.741253414354,47.8275037663523"
+                    Point2="168.741253414354,47.8275037663523"
+                    Point3="168.741253414354,51.8275037663523" />
+                  <mssgle:LineSegment
+                    End="168.741253414354,88.1550075327045" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="28.5642399884272,52.8275037663523,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -1897,7 +1899,7 @@ WHERE UserID = ?;</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1907,7 +1909,7 @@ WHERE UserID = ?;</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
