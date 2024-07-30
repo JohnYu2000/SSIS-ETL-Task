@@ -9,6 +9,11 @@
 USE [KoreASsignment_John_Yu]
 GO
 
+-- ##########################################################################
+-- Drop existing index on prod.Users if it exists.
+-- This index is used to improve the performance of the Lookup Transformation
+-- when performing Incremental Load to Production.
+-- ##########################################################################
 IF EXISTS (SELECT name
 		   FROM sys.indexes
 		   WHERE name = 'IX_UserID'
@@ -23,32 +28,19 @@ ON prod.Users (UserID);
 GO
 
 -- ##########################################################################
--- Description: The stg.Errors table is where rows from the staging table
---              with errors end up. I decided that if there is a row with an
---              error then that row should be put aside for further 
---              investigation. The stg.Errors table contains rows with errors
---              that are set aside for further review by the development
---              team.
+-- Ensure stg.Errors table exists to store erroneous records for review.
+-- If the table exists, truncate it to remove previous error records.
 -- ##########################################################################
 IF EXISTS (SELECT *
 		   FROM sys.objects
 		   WHERE object_id = OBJECT_ID(N'stg.Errors')
 		   AND type IN (N'U'))
 BEGIN
---  #########################################################################
---  The reason I truncate the stg.Errors table is because there is no
---  query to check and remove duplicates in this table.
---  #########################################################################
 	TRUNCATE TABLE stg.Errors;
 END
 ELSE
 BEGIN
---  #########################################################################
---  The stg.Errors table houses rows that contains errors. This is a design
---  choice I made to handle data with errors. I decided that it was better
---  to have erroneous rows be reviewed by the developer instead of writing
---  a script to correct them myself.
---  #########################################################################
+	-- Create the stg.Errors table to store erroneous records.
 	CREATE TABLE stg.Errors (
 		StgID INT PRIMARY KEY,
 		UserID INT,
@@ -62,12 +54,18 @@ BEGIN
 END
 GO
 
--- Create a stored procedure for data cleaning
+-- ##########################################################################
+-- Description: This stored procedure performs data cleaning immediately
+--              after data is extracted and loaded into the staging table.
+-- ##########################################################################
 CREATE PROCEDURE dbo.CleanStagingData
 AS
 BEGIN
+	-- Prevents the message about the number of rows affected by a T-SQL
+	-- statement from being returned.
 	SET NOCOUNT ON;
 
+	-- Start a transaction to ensure atomicity.
 	BEGIN TRANSACTION;
 
 	BEGIN TRY
@@ -84,7 +82,7 @@ BEGIN
 		DELETE FROM stg.Users
 		WHERE StgID IN (SELECT StgID FROM CTE_Duplicates WHERE RowNum > 1);
 
-		-- Declare variables to be used to find purchaseTotals that are outliers.
+		-- Declare variables to find purchaseTotals that are outliers.
 		DECLARE
 			@Q1 FLOAT,
 			@Q3 FLOAT,
@@ -92,22 +90,22 @@ BEGIN
 			@LowerLimit FLOAT,
 			@UpperLimit FLOAT;
 
-		-- Calculate the first quartile (Q1)
+		-- Calculate the first quartile (Q1).
 		SELECT @Q1 = PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY PurchaseTotal) OVER ()
 		FROM stg.Users;
 
-		-- Calculate the third quartile (Q3)
+		-- Calculate the third quartile (Q3).
 		SELECT @Q3 = PERCENTILE_CONT(0.75) WITHIN GROUP (ORDER BY PurchaseTotal) OVER ()
 		FROM stg.Users;
 
-		-- Calculate the IQR
+		-- Calculate the Interquartile Range (IQR)
 		SET @IQR = @Q3 - @Q1;
 
-		-- Calculate the lower and upper limits
+		-- Calculate the lower and upper limits for outliers.
 		SET @LowerLimit = @Q1 - 1.5 * @IQR;
 		SET @UpperLimit = @Q3 + 1.5 * @IQR;
 
-		-- DELETE records from Staging Table and capture the delted records using OUTPUT
+		-- Delete erroneous records from stg.Users and insert them into stg.Errors.
 		DELETE FROM stg.Users
 		OUTPUT
 			DELETED.StgID,
@@ -129,7 +127,7 @@ BEGIN
 			OR RegistrationDate IS NULL
 			OR LastLoginDate IS NULL
 			OR PurchaseTotal IS NULL
-			-- Remove records with special characters.
+			-- Remove records with special characters in FullName or Email.
 			OR FullName LIKE '%[^a-zA-Z0-9 ]%'
 			OR Email LIKE '%[^a-zA-Z0-9@._-]%'
 			-- Remove records with future dates.
@@ -142,17 +140,20 @@ BEGIN
 			OR PurchaseTotal < 0
 			-- Remove records with invalid email format.
 			OR Email NOT LIKE '%_@__%.__%'
-			-- Remove records with very old dates.
+			-- Remove records with very old dates (over 100 years old)
 			OR RegistrationDate < DATEADD(YEAR, -100, GETDATE())
 			OR LastLoginDate < DATEADD(YEAR, -100, GETDATE())
 			-- Remove records with outlier purchase totals.
 			OR PurchaseTotal < @LowerLimit
 			OR PurchaseTotal > @UpperLimit
+		-- Commit the transaction if everything is successful.
 		COMMIT TRANSACTION;
 	END TRY
 	BEGIN CATCH
+		-- Rollback the transaction if any error occurs.
 		ROLLBACK TRANSACTION;
-		-- Handle errors
+
+		-- Handle errors by capturing error information.
 		DECLARE
 			@ErrorMessage NVARCHAR(4000),
 			@ErrorSeverity INT,
@@ -161,6 +162,7 @@ BEGIN
 			@ErrorMessage = ERROR_MESSAGE(),
 			@ErrorSeverity = ERROR_SEVERITY(),
 			@ErrorState = ERROR_STATE();
+		-- Raise the error with the captured information.
 		RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
 	END CATCH
 END
