@@ -23,7 +23,8 @@ BEGIN
 END
 GO
 
-CREATE NONCLUSTERED INDEX IX_UserID
+-- Create a clustered index on UserID for prod.Users.
+CREATE CLUSTERED INDEX IX_UserID
 ON prod.Users (UserID);
 GO
 
