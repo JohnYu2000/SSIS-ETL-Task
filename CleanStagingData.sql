@@ -9,6 +9,19 @@
 USE [KoreASsignment_John_Yu]
 GO
 
+IF EXISTS (SELECT name
+		   FROM sys.indexes
+		   WHERE name = 'IX_UserID'
+		   AND object_id = OBJECT_ID('prod.Users'))
+BEGIN
+	DROP INDEX IX_UserID ON prod.Users;
+END
+GO
+
+CREATE NONCLUSTERED INDEX IX_UserID
+ON prod.Users (UserID);
+GO
+
 -- ##########################################################################
 -- Description: The stg.Errors table is where rows from the staging table
 --              with errors end up. I decided that if there is a row with an

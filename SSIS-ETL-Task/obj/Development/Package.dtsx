@@ -11,8 +11,8 @@
   DTS:LocaleID="4105"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{821B1586-D120-498B-B3F8-333A08B8EDF3}">
+  DTS:VersionBuild="45"
+  DTS:VersionGUID="{AD54E0A8-2C7A-4357-A774-06EF8285DC0D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -857,36 +857,6 @@ where [refTable].[UserID] = ?</property>
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\Incremental Load to Production\Check Existing Records.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Incremental Load to Production\Check Existing Records.Outputs[Lookup Match Output].Columns[ID]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Incremental Load to Production\Check Existing Records.Outputs[Lookup Match Output].Columns[ID]"
-                      name="ID"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">ID</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Incremental Load to Production\Check Existing Records.Outputs[Lookup Match Output].Columns[UserID]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Incremental Load to Production\Check Existing Records.Outputs[Lookup Match Output].Columns[UserID]"
-                      name="UserID"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">UserID</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
@@ -1172,15 +1142,6 @@ where [refTable].[UserID] = ?</property>
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Incremental Load to Production\OLE DB Source.Outputs[OLE DB Source Output].Columns[StgID]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Incremental Load to Production\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[StgID]"
-                      lineageId="Package\Incremental Load to Production\OLE DB Source.Outputs[OLE DB Source Output].Columns[StgID]"
-                      name="StgID"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\Incremental Load to Production\OLE DB Source.Outputs[OLE DB Source Output].Columns[UserID]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
@@ -1293,11 +1254,6 @@ where [refTable].[UserID] = ?</property>
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
-                    <outputColumn
-                      refId="Package\Incremental Load to Production\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StgID]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load to Production\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[StgID]"
-                      name="StgID" />
                     <outputColumn
                       refId="Package\Incremental Load to Production\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UserID]"
                       dataType="i4"
@@ -1873,7 +1829,7 @@ WHERE UserID = ?;</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="28.5642399884272,52.8275037663523,111.6127734375,11.609375"
+              BoundingBox="28.564239988427,52.8275037663523,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
