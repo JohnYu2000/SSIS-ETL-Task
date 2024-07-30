@@ -24,7 +24,7 @@ END
 GO
 
 -- Create a clustered index on UserID for prod.Users.
-CREATE CLUSTERED INDEX IX_UserID
+CREATE NONCLUSTERED INDEX IX_UserID
 ON prod.Users (UserID);
 GO
 
@@ -106,47 +106,61 @@ BEGIN
 		SET @LowerLimit = @Q1 - 1.5 * @IQR;
 		SET @UpperLimit = @Q3 + 1.5 * @IQR;
 
-		-- Delete erroneous records from stg.Users and insert them into stg.Errors.
-		DELETE FROM stg.Users
-		OUTPUT
-			DELETED.StgID,
-			DELETED.UserID,
-			DELETED.FullName,
-			DELETED.Age,
-			DELETED.Email,
-			DELETED.RegistrationDate,
-			DELETED.LastLoginDate,
-			DELETED.PurchaseTotal
-		INTO
-			stg.Errors
-		WHERE
-			-- Remove records with null values.
-			UserID IS NULL
-			OR FullName IS NULL
-			OR Age IS NULL
-			OR Email IS NULL
-			OR RegistrationDate IS NULL
-			OR LastLoginDate IS NULL
-			OR PurchaseTotal IS NULL
-			-- Remove records with special characters in FullName or Email.
-			OR FullName LIKE '%[^a-zA-Z0-9 ]%'
-			OR Email LIKE '%[^a-zA-Z0-9@._-]%'
-			-- Remove records with future dates.
-			OR RegistrationDate > GETDATE()
-			OR LastLoginDate > GETDATE()
-			OR RegistrationDate > LastLoginDate
-			-- Remove records with negative values.
-			OR UserID < 0
-			OR Age < 0
-			OR PurchaseTotal < 0
-			-- Remove records with invalid email format.
-			OR Email NOT LIKE '%_@__%.__%'
-			-- Remove records with very old dates (over 100 years old)
-			OR RegistrationDate < DATEADD(YEAR, -100, GETDATE())
-			OR LastLoginDate < DATEADD(YEAR, -100, GETDATE())
-			-- Remove records with outlier purchase totals.
-			OR PurchaseTotal < @LowerLimit
-			OR PurchaseTotal > @UpperLimit
+		-- Process data in batches
+		DECLARE @BatchSize INT = 10000;
+		DECLARE @MinStgID INT, @MaxStgID INT;
+
+		SELECT @MinStgID = MIN(StgID), @MaxStgID = MAX(StgID) FROM stg.Users;
+
+		WHILE @MinStgID IS NOT NULL AND @MinStgID <= @MaxStgID
+		BEGIN
+			-- Delete erroneous records from stg.Users and insert them into stg.Errors.
+			DELETE FROM stg.Users
+			OUTPUT
+				DELETED.StgID,
+				DELETED.UserID,
+				DELETED.FullName,
+				DELETED.Age,
+				DELETED.Email,
+				DELETED.RegistrationDate,
+				DELETED.LastLoginDate,
+				DELETED.PurchaseTotal
+			INTO
+				stg.Errors
+			WHERE
+				StgID BETWEEN @MinStgID AND @MinStgID + @BatchSize - 1
+				AND (
+					-- Remove records with null values.
+					UserID IS NULL
+					OR FullName IS NULL
+					OR Age IS NULL
+					OR Email IS NULL
+					OR RegistrationDate IS NULL
+					OR LastLoginDate IS NULL
+					OR PurchaseTotal IS NULL
+					-- Remove records with special characters in FullName or Email.
+					OR FullName LIKE '%[^a-zA-Z0-9 ]%'
+					OR Email LIKE '%[^a-zA-Z0-9@._-]%'
+					-- Remove records with future dates.
+					OR RegistrationDate > GETDATE()
+					OR LastLoginDate > GETDATE()
+					OR RegistrationDate > LastLoginDate
+					-- Remove records with negative values.
+					OR UserID < 0
+					OR Age < 0
+					OR PurchaseTotal < 0
+					-- Remove records with invalid email format.
+					OR Email NOT LIKE '%_@__%.__%'
+					-- Remove records with very old dates (over 100 years old)
+					OR RegistrationDate < DATEADD(YEAR, -100, GETDATE())
+					OR LastLoginDate < DATEADD(YEAR, -100, GETDATE())
+					-- Remove records with outlier purchase totals.
+					OR PurchaseTotal < @LowerLimit
+					OR PurchaseTotal > @UpperLimit
+				);
+			SET @MinStgID = @MinStgID + @BatchSize;
+		END
+
 		-- Commit the transaction if everything is successful.
 		COMMIT TRANSACTION;
 	END TRY

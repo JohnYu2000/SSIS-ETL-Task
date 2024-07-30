@@ -8,6 +8,8 @@
     - [Installation and Configuration](#installation-and-configuration)
     - [Usage](#usage)
 - [Design](#design)
+	[Data Cleaning](#data-cleaning)
+	[Optimization](#optimization)
 - [SQL Scripts](#sql-scripts)
 
 # Overview
@@ -65,6 +67,7 @@ This SSIS ETL project is designed to extract user data from an Excel source, tra
     * Execute the data flow to load cleaned data from the `stg.Users` table into the `prod.Users` table, performing insertions and updates as necessary.
 
 # Design
+## Data Cleaning
 The data cleaning process is a critical step in ensuring the accuracy and integrity of the data before it is loaded into the production database. Below are the key steps and criteria used in the data cleaning script:
 1. **Dropping and Recreating Index**:
 	* **Reason**: The index on `prod.Users` is dropped and recreated to improve the performance of the Lookup Transformation during the incremental load process.
@@ -83,6 +86,8 @@ The data cleaning process is a critical step in ensuring the accuracy and integr
 	* **Purpose**: Erroneous records are inserted into the `stg.Errors` table for review and analysis. This helps in identifying patterns and potential issues in the source data.
 5. **Invalid Data Type Invalid Dates, and Old Date Format Handling**:
 	* **Note**: Criteria for handling incorrect data types, invalid dates, and dates in the wrong format are not included in the data cleaning script. This is because these issues are addressed during the data conversion step in the *Extract and Load Data to Staging* data flow using the Data Conversion Transformation.
+
+## Optimization
 
 # SQL Scripts
 ## Data Cleaning Script
