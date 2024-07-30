@@ -50,7 +50,8 @@ BEGIN
 		Email NVARCHAR(255),
 		RegistrationDate DATE,
 		LastLoginDate DATE,
-		PurchaseTotal FLOAT
+		PurchaseTotal FLOAT,
+		Reason NVARCHAR(255)
 	);
 END
 GO
@@ -124,10 +125,35 @@ BEGIN
 				DELETED.Email,
 				DELETED.RegistrationDate,
 				DELETED.LastLoginDate,
-				DELETED.PurchaseTotal
+				DELETED.PurchaseTotal,
+				-- Determine the reason for record exclusion and log it in the stg.Errors table.
+				CASE
+					WHEN DELETED.UserID IS NULL THEN 'UserID is NULL'
+					WHEN DELETED.FullName IS NULL THEN 'FullName is NULL'
+					WHEN DELETED.Age IS NULL Then 'Age is NULL'
+					WHEN DELETED.Email IS NULL THEN 'Email is NULL'
+					WHEN DELETED.RegistrationDate IS NULL THEN 'RegistrationDate is NULL'
+					WHEN DELETED.LastLoginDate IS NULL THEN 'LastLoginDate is NULL'
+					WHEN DELETED.PurchaseTotal IS NULL THEN 'PurchaseTotal is NULL'
+					WHEN DELETED.FullName LIKE '%[^a-zA-Z0-9 ]%' THEN 'FullName contains special characters'
+					WHEN DELETED.Email LIKE '%[^a-zA-Z0-9@._-]%' THEN 'Email contains special characters'
+					WHEN DELETED.RegistrationDate > GETDATE() THEN 'RegistrationDate is in the future'
+					WHEN DELETED.LastLoginDate > GETDATE() THEN 'LastLoginDate is in the future'
+					WHEN DELETED.RegistrationDate > DELETED.LastLoginDate THEN 'RegistrationDate is after LastLoginDate'
+					WHEN DELETED.UserID < 0 THEN 'UserID is negative'
+					WHEN DELETED.Age < 0 THEN 'Age is negative'
+					WHEN DELETED.PurchaseTotal < 0 THEN 'PurchaseTotal is negative'
+					WHEN DELETED.Email NOT LIKE '%_@__%.__%' THEN 'Email format is invalid'
+					WHEN DELETED.RegistrationDate < DATEADD(YEAR, -100, GETDATE()) THEN 'RegistrationDate is older than 100 years'
+					WHEN DELETED.LastLoginDate < DATEADD(YEAR, -100, GETDATE()) THEN 'LastLoginDate is older than 100 years'
+					WHEN DELETED.PurchaseTotal < @LowerLimit THEN 'PurchaseTotal is an outlier'
+					WHEN DELETED.PurchaseTotal > @UpperLimit THEN 'PurchaseTotal is an outlier'
+					ELSE 'Unknown reason'
+				END AS Reason
 			INTO
 				stg.Errors
 			WHERE
+				-- Process records in batches to handle large datasets efficiently.
 				StgID BETWEEN @MinStgID AND @MinStgID + @BatchSize - 1
 				AND (
 					-- Remove records with null values.

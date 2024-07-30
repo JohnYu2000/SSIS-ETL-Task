@@ -11,8 +11,8 @@
   DTS:LocaleID="4105"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="45"
-  DTS:VersionGUID="{AD54E0A8-2C7A-4357-A774-06EF8285DC0D}">
+  DTS:VersionBuild="62"
+  DTS:VersionGUID="{236CED5E-D932-434D-9A29-CFB020BF1DFB}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -29,6 +29,16 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[execution.log.txt]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{28AC2740-B1E2-4763-BB5D-712F539ADC53}"
+      DTS:ObjectName="execution.log.txt">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="C:\Ting\Downloads\execution.log.txt" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[LocalHost.KoreAssignment_John_Yu]"
       DTS:CreationName="OLEDB"
       DTS:DTSID="{B133A42F-DBB1-4271-A14B-229832DD2899}"
@@ -42,6 +52,157 @@
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="2">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">8,7,OnError,13,OnInformation,25,OnPipelinePostPrimeOutput,24,OnPipelinePrePrimeOutput,18,OnPipelineRowsSent,13,OnPostExecute,12,OnPreExecute,9,OnWarning</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnInformation"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPipelinePostPrimeOutput"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPipelinePrePrimeOutput"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPipelineRowsSent"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPostExecute"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPreExecute"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+  </DTS:LoggingOptions>
   <DTS:Executables>
     <DTS:Executable
       DTS:refId="Package\Execute SQL Task"
@@ -54,6 +215,9 @@
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{B133A42F-DBB1-4271-A14B-229832DD2899}"
@@ -70,6 +234,9 @@
       DTS:ObjectName="Extract and Load Data to Staging"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -744,6 +911,9 @@
       DTS:ObjectName="Incremental Load to Production"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2" />
       <DTS:ObjectData>
         <pipeline
           version="1">
@@ -1549,7 +1719,7 @@ WHERE UserID = ?;</property>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{168EBFA3-1AA8-4D53-B4DF-F1508AB2838C}"
+      DTS:DTSID="{03C3501E-4911-47AF-83D4-11E1E59C007B}"
       DTS:From="Package\Extract and Load Data to Staging"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
@@ -1578,51 +1748,29 @@ WHERE UserID = ?;</property>
         <NodeLayout
           Size="168,42.6666666666667"
           Id="Package\Execute SQL Task"
-          TopLeft="155.62499304302,202.526313565775" />
+          TopLeft="159.374992875382,230.649120530731" />
         <NodeLayout
           Size="236,42.6666666666667"
           Id="Package\Extract and Load Data to Staging"
-          TopLeft="116.87499477528,110.842104046133" />
+          TopLeft="123.124994495883,110.842104046133" />
         <NodeLayout
           Size="228,42.6666666666667"
           Id="Package\Incremental Load to Production"
-          TopLeft="121.249994579703,291.473681010203" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="237.24999390915,153.5087707128">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,49.0175428529746"
-              Start="0,0"
-              End="0,41.5175428529746">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.5175428529746" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="124.999994412065,319.596487975159" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="237.437493811361,245.192980232442">
+          TopLeft="241.187493643723,273.315787197398">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,46.2807007777612"
+              EndConnector="0,46.2807007777614"
               Start="0,0"
-              End="0,38.7807007777612">
+              End="0,38.7807007777614">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,38.7807007777612" />
+                    End="0,38.7807007777614" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1638,6 +1786,28 @@ WHERE UserID = ?;</property>
           Size="29.3333333333334,40"
           Id="333ef706-8c2f-4e10-973a-0a852a6c4e86"
           TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="242.249993685633,153.5087707128">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,77.1403498179315"
+              Start="0,0"
+              End="0,69.6403498179315">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,69.6403498179315" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -1647,6 +1817,10 @@ WHERE UserID = ?;</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Extract and Load Data to Staging\Staging Destination"
+          TopLeft="205.624990807847,279.157891957218" />
+        <NodeLayout
           Size="158.666666666667,42.6666666666667"
           Id="Package\Extract and Load Data to Staging\Data Conversion"
           TopLeft="207.499990724028,136.842103760659" />
@@ -1654,10 +1828,6 @@ WHERE UserID = ?;</property>
           Size="142.666666666667,42.6666666666667"
           Id="Package\Extract and Load Data to Staging\Excel Source"
           TopLeft="212.999993406236,22.3947373153925" />
-        <NodeLayout
-          Size="172,42.6666666666667"
-          Id="Package\Extract and Load Data to Staging\Staging Destination"
-          TopLeft="201.874990975485,249.052628844398" />
         <EdgeLayout
           Id="Package\Extract and Load Data to Staging.Paths[Excel Source Output]"
           TopLeft="285.583325398465,65.0614039820592">
@@ -1682,18 +1852,18 @@ WHERE UserID = ?;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Extract and Load Data to Staging.Paths[Data Conversion Output]"
-          TopLeft="287.354157516423,179.508770427325">
+          TopLeft="289.229157432604,179.508770427326">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,69.5438584170731"
+              EndConnector="0,99.6491215298922"
               Start="0,0"
-              End="0,62.0438584170731">
+              End="0,92.1491215298922">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,62.0438584170731" />
+                    End="0,92.1491215298922" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1724,57 +1894,21 @@ WHERE UserID = ?;</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="154.666666666667,42.6666666666667"
-          Id="Package\Incremental Load to Production\OLE DB Source"
-          TopLeft="306.999990850687,88.9999973475934" />
-        <NodeLayout
           Size="196.666666666667,42.6666666666667"
           Id="Package\Incremental Load to Production\Update Existing Records"
           TopLeft="185.384609859724,354.102555001394" />
         <NodeLayout
-          Size="193.333333333334,42.6666666666667"
-          Id="Package\Incremental Load to Production\Check Existing Records"
-          TopLeft="288.181809593331,220.909084325487" />
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Incremental Load to Production\OLE DB Source"
+          TopLeft="306.999990850687,88.9999973475934" />
         <NodeLayout
           Size="173.333333333334,42.6666666666667"
           Id="Package\Incremental Load to Production\Insert New Records"
           TopLeft="466.923063007685,359.230758524858" />
-        <EdgeLayout
-          Id="Package\Incremental Load to Production.Paths[Lookup Match Output]"
-          TopLeft="353.959587371109,263.575750992154">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-70.2416441780518,90.5268040092399"
-              Start="0,0"
-              End="-70.2416441780518,83.0268040092399">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.6565444414979" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,32.6565444414979"
-                    Point2="0,36.6565444414979"
-                    Point3="-4,36.6565444414979" />
-                  <mssgle:LineSegment
-                    End="-66.2416441780518,36.6565444414979" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-66.2416441780518,36.6565444414979"
-                    Point2="-70.2416441780518,36.6565444414979"
-                    Point3="-70.2416441780518,40.6565444414979" />
-                  <mssgle:LineSegment
-                    End="-70.2416441780518,83.0268040092399" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-83.3122088077759,41.6565444414979,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\Incremental Load to Production\Check Existing Records"
+          TopLeft="288.181809593331,220.909084325487" />
         <EdgeLayout
           Id="Package\Incremental Load to Production.Paths[OLE DB Source Output]"
           TopLeft="384.590900222009,131.66666401426">
@@ -1794,7 +1928,9 @@ WHERE UserID = ?;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1833,6 +1969,42 @@ WHERE UserID = ?;</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Incremental Load to Production.Paths[Lookup Match Output]"
+          TopLeft="353.959587371109,263.575750992154">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-70.2416441780518,90.5268040092399"
+              Start="0,0"
+              End="-70.2416441780518,83.0268040092399">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.6565444414979" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.6565444414979"
+                    Point2="0,36.6565444414979"
+                    Point3="-4,36.6565444414979" />
+                  <mssgle:LineSegment
+                    End="-66.2416441780518,36.6565444414979" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-66.2416441780518,36.6565444414979"
+                    Point2="-70.2416441780518,36.6565444414979"
+                    Point3="-70.2416441780518,40.6565444414979" />
+                  <mssgle:LineSegment
+                    End="-70.2416441780518,83.0268040092399" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-83.3122088077759,41.6565444414979,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -1850,29 +2022,6 @@ WHERE UserID = ?;</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Incremental Load to Production\Check Existing Records">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Incremental Load to Production\Insert New Records">
     <Properties>
       <Property>
@@ -1882,6 +2031,29 @@ WHERE UserID = ?;</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Incremental Load to Production\Check Existing Records">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
