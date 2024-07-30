@@ -1,9 +1,9 @@
 -- ##########################################################################
 -- Author: Junye (John) Yu
 -- Description: This stored procedure is used to perform data cleaning for
---				the staging table. This query is invoked immediately after
---				the "Extract and Load Data to Staging" data flow task is
---				complete.
+--              the staging table. This query is invoked immediately after
+--              the "Extract and Load Data to Staging" data flow task is
+--              complete.
 -- ##########################################################################
 
 USE [KoreASsignment_John_Yu]
