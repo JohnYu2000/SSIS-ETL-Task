@@ -8,8 +8,8 @@
     - [Installation and Configuration](#installation-and-configuration)
     - [Usage](#usage)
 - [Design](#design)
-	[Data Cleaning](#data-cleaning)
-	[Optimization](#optimization)
+	- [Data Cleaning](#data-cleaning)
+	- [Optimization](#optimization)
 - [SQL Scripts](#sql-scripts)
 
 # Overview
