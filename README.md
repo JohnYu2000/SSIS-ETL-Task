@@ -10,6 +10,7 @@
 - [Design](#design)
 	- [Data Cleaning](#data-cleaning)
 	- [Optimization](#optimization)
+    - [Challenges](#challenges-faced)
 - [SQL Scripts](#sql-scripts)
 
 # Overview
@@ -88,6 +89,23 @@ The data cleaning process is a critical step in ensuring the accuracy and integr
 	* **Note**: Criteria for handling incorrect data types, invalid dates, and dates in the wrong format are not included in the data cleaning script. This is because these issues are addressed during the data conversion step in the *Extract and Load Data to Staging* data flow using the Data Conversion Transformation.
 
 ## Optimization
+
+1. **Nonclustered Index for Lookup Transformation**:
+    * **Purpose**: The nonclustered index on `UserID` in the `prod.Users` table is used to improve the performance of the Lookup Transformation during the incremental load process.
+    * **Significance**: Indexes enhance the speed of data retrieval operations, making the Lookup Transformation more efficient by quickly finding matching records.
+2. **SET NOCOUNT ON**:
+    * **Purpose**: Prevents the SQL Server from sending messages about the number of rows affected by a T-SQL statement.
+    * **Significance**: This improves the performance of the stored procedure by reducing network traffic between the server and the client.
+3. **Transaction Wrapping**:
+    * **Purpose**: Ensures all operations within the transaction are completed successfully before committing the changes to the database.
+    * **Significance**: If any part of the transaction fails, all changes are rolled back, maintaining data integrity and consistency.
+4. **Using the OUTPUT keyword**:
+    * **Purpose**: Captures the deleted records and inserts them into the `stg.Errors` table.
+    * **Significance**: This allows for auditing and analyzing erroneous records separately, helping in understanding data quality issues.
+5. **Batch Processing**:
+    * **Importance**: Handling data in batches can significantly improve performance and manageability, especially with large datasets. However, in this case, the script processes all data in a single transaction for simplicity and atomicity.
+
+## Challenges Faced
 
 # SQL Scripts
 ## Data Cleaning Script
