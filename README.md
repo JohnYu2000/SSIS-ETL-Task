@@ -21,7 +21,7 @@ This SSIS ETL project is designed to extract user data from an Excel source, tra
 2. **Execute SQL Task for Data Cleaning**
 3. **Incremental Load to Production (Data Flow)**
 
-# Data Flow Structure
+## Data Flow Structure
 
 1. **Extract and Load Data to Staging (Data Flow)**
     * **Excel Source**: Loads user data from an Excel file in string format.
