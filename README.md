@@ -10,7 +10,7 @@
 - [Design](#design)
 	- [Data Cleaning](#data-cleaning)
 	- [Optimization](#optimization)
-    - [Challenges](#challenges-faced)
+    - [Challenges Faced](#challenges-faced)
 - [Execution Report](#execution-report)
 - [Appendix](#appendix)
     - [Input Source File (.xlsx)](#input-source-file-xlsx)
@@ -109,6 +109,13 @@ The data cleaning process is a critical step in ensuring the accuracy and integr
     * **Importance**: Handling data in batches can significantly improve performance and manageability, especially with large datasets. However, in this case, the script processes all data in a single transaction for simplicity and atomicity.
 
 ## Challenges Faced
+1. **Execution Logging**:
+    * **Initial Approach**: Intended to use SSIS Script Tasks and RowCount Transformations for logging.
+    * **Issues**: Faced configuration difficulties and inaccurate counts.
+    * **Solution**: Switched to using a SQL script to gather logging information from the stored procedure, simplifying the process and ensuring accuracy.
+2. **Handling Erroneous Records**:
+    * **Challenges**: Deciding the best approach to handle erroneous records.
+    * **Solution**: Chose to insert erroneous records into a separate table (`stg.Errors`) for developer review, minimizing assumptions and providing clear visibility into data quality issues.
 
 # Execution report
 
