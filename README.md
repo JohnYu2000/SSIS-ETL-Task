@@ -53,7 +53,7 @@ After cloning this repository you should have the following files.
     * **input.xlsx**: Source file containing input data for testing purposes.
 * **SSIS-ETL-Task/**: This folder was initialized when creating the Integration Services Project.
 * **.gitignore**
-* **backup.zip**: ZIP file containing a backup of the database, including the `stg.Errors`, `stg.Users`, and `prod.Users` tables, and the `CleanStagingData` stored procedure.
+* **backup.zip**: ZIP file containing a backup of the database, including the `stg.Errors`, `stg.Users`, and `prod.Users` tables, and the `CleanStagingData` stored procedure. The `prod.Users` table is initialized with 10 Users defined in the `KoreAssignmentInit` script.
 * **README.md**
 * **SSIS-ETL-Task.sln**: Solution file containing the SSIS project.
 
