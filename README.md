@@ -159,3 +159,8 @@ The input data was sourced from `input.xlsx`.
 | 30 | 136 | Extra Large Total | 27 | extralargetotal@example.com | 2020-10-10 | 2023-02-02 | 1000000 | PurchaseTotal is an outlier |
 | 31 | 137 | Incorrect Email | 28 | notanemail | 2021-11-11 | 2023-02-01 | 190 | Email format is invalid |
 | 35 | 140 | Test2 | 24 | test2@example.com | 2024-07-29 | 2023-07-01 | 100 | RegistrationDate is after LastLoginDate |
+
+# Known Issues
+* **Slow Performance**:
+    * **Issue**: The SSIS package runs very slowly.
+    * **Assumption**: The slow performance is presumed to be due to my laptop's hardware limitations rather than the SSIS configurations.
