@@ -120,7 +120,7 @@ The data cleaning process is a critical step in ensuring the accuracy and integr
 # Execution report
 
 ### Data Source
-The input data was sourced from the `input.xlsx` file
+The input data was sourced from the [`input.xlsx`](#input-source-file-xlsx) file
 
 ### Records Processed
 * **Total Records Successfully Processed**: 18
@@ -199,53 +199,6 @@ USE [KoreASsignment_John_Yu]
 GO
 
 -- ##########################################################################
--- Drop existing index on prod.Users if it exists.
--- This index is used to improve the performance of the Lookup Transformation
--- when performing Incremental Load to Production.
--- ##########################################################################
-IF EXISTS (SELECT name
-		   FROM sys.indexes
-		   WHERE name = 'IX_UserID'
-		   AND object_id = OBJECT_ID('prod.Users'))
-BEGIN
-	DROP INDEX IX_UserID ON prod.Users;
-END
-GO
-
--- Create a clustered index on UserID for prod.Users.
-CREATE NONCLUSTERED INDEX IX_UserID
-ON prod.Users (UserID);
-GO
-
--- ##########################################################################
--- Ensure stg.Errors table exists to store erroneous records for review.
--- If the table exists, truncate it to remove previous error records.
--- ##########################################################################
-IF EXISTS (SELECT *
-		   FROM sys.objects
-		   WHERE object_id = OBJECT_ID(N'stg.Errors')
-		   AND type IN (N'U'))
-BEGIN
-	TRUNCATE TABLE stg.Errors;
-END
-ELSE
-BEGIN
-	-- Create the stg.Errors table to store erroneous records.
-	CREATE TABLE stg.Errors (
-		StgID INT PRIMARY KEY,
-		UserID INT,
-		FullName NVARCHAR(255),
-		Age INT,
-		Email NVARCHAR(255),
-		RegistrationDate DATE,
-		LastLoginDate DATE,
-		PurchaseTotal FLOAT,
-		Reason NVARCHAR(255)
-	);
-END
-GO
-
--- ##########################################################################
 -- Description: This stored procedure performs data cleaning immediately
 --              after data is extracted and loaded into the staging table.
 -- ##########################################################################
@@ -255,6 +208,50 @@ BEGIN
 	-- Prevents the message about the number of rows affected by a T-SQL
 	-- statement from being returned.
 	SET NOCOUNT ON;
+
+	-- ######################################################################
+	-- Ensure stg.Errors table exists to store erroneous records for review.
+	-- If the table exists, truncate it to remove previous error records.
+	-- ######################################################################
+	IF EXISTS (SELECT *
+			   FROM sys.objects
+			   WHERE object_id = OBJECT_ID(N'stg.Errors')
+			   AND type IN (N'U'))
+	BEGIN
+		TRUNCATE TABLE stg.Errors;
+	END
+	ELSE
+	BEGIN
+		-- Create the stg.Errors table to store erroneous records.
+		CREATE TABLE stg.Errors (
+			StgID INT PRIMARY KEY,
+			UserID INT,
+			FullName NVARCHAR(255),
+			Age INT,
+			Email NVARCHAR(255),
+			RegistrationDate DATE,
+			LastLoginDate DATE,
+			PurchaseTotal FLOAT,
+			Reason NVARCHAR(255)
+		);
+	END
+
+	-- #####################################################################
+	-- Drop existing index on prod.Users if it exists.
+	-- This index is used to improve the performance of the Lookup
+	-- Transformation when performing Incremental Load to Production.
+	-- #####################################################################
+	IF EXISTS (SELECT name
+			   FROM sys.indexes
+			   WHERE name = 'IX_UserID'
+			   AND object_id = OBJECT_ID('prod.Users'))
+	BEGIN
+		DROP INDEX IX_UserID ON prod.Users;
+	END
+
+	-- Create a clustered index on UserID for prod.Users.
+	CREATE NONCLUSTERED INDEX IX_UserID
+	ON prod.Users (UserID);
 
 	-- Start a transaction to ensure atomicity.
 	BEGIN TRANSACTION;
