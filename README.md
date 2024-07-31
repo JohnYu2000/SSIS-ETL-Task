@@ -13,6 +13,7 @@
 	- [Optimization](#optimization)
     - [Challenges Faced](#challenges-faced)
 - [Execution Report](#execution-report)
+- [Known Issues](#known-issues)
 
 # Overview
 This SSIS ETL project is designed to extract user data from an Excel source, transform and clean the data, and incrementally load it into a production SQL Server database. This project is composed of three main parts:
