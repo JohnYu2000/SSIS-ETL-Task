@@ -2,9 +2,10 @@
 
 **Table of Contents**
 - [Overview](#overview)
-- [Project Structure](#project-structure)
+    - [Data Flow Structure](#data-flow-structure)
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
+    - [Files](#files)
     - [Installation and Configuration](#installation-and-configuration)
     - [Usage](#usage)
 - [Design](#design)
@@ -23,7 +24,7 @@ This SSIS ETL project is designed to extract user data from an Excel source, tra
 2. **Execute SQL Task for Data Cleaning**
 3. **Incremental Load to Production (Data Flow)**
 
-# Project Structure
+# Data Flow Structure
 
 1. **Extract and Load Data to Staging (Data Flow)**
     * **Excel Source**: Loads user data from an Excel file in string format.
@@ -43,6 +44,20 @@ This SSIS ETL project is designed to extract user data from an Excel source, tra
 * Visual Studio 2022
 * SQL Server Integration Services (SSIS)
 * Excel file with user data
+
+## Files
+
+After cloning this repository you should have the following files.
+
+* **Resources/**
+    * **CleanStagingData.sql**: SQL script to create the stored procedure for data cleaning.
+    * **CleanStagingDataLog.sql**: SQL script to log the number of records processed and excluded.
+    * **input.xlsx**: Source file containing input data for testing purposes.
+* **SSIS-ETL-Task/**: This folder was initialized when creating the Integration Services Project.
+* **.gitignore**
+* **backup.zip**: ZIP file containing a backup of the database, including the `stg.Errors`, `stg.Users`, and `prod.Users` tables, and the `CleanStagingData` stored procedure.
+* **README.md**
+* **SSIS-ETL-Task.sln**: Solution file containing the SSIS project.
 
 ## Installation and Configuration
 1. **Clone the Repository**:

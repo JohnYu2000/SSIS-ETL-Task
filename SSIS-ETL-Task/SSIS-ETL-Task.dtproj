@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">TING-MACHINE</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAb97JadeOBE2QIt0DQ8M+UwAAAAACAAAAAAAQZgAAAAEAACAAAAAlHK5MARhS1Iz8pJeyprjnBNmwF1RNA1WfxVnMIkBO5QAAAAAOgAAAAAIAACAAAAB9azD5mtMcZlLGz1J3LHPwIASb/F2WDQn64jOEihosSZAAAAAtoECJYqS/mx84Z9jzKuE7RxMZ4huygMz75fIcC8L9Uet5J9s1YZcdX6ztUXPEo+Xj1loEVElxouZe0ZIbWrKmuiEzlDAU3B/bqO+6asWWJYmoYFdu5MtlEA1n5+4FlQ+Z5cZhqYeDYkz7H9UtwizM4emKxO9rDnnioyBBolr28We9jrxKUflsG5dBYj2FpLpAAAAAPRLAZY6GHzNYE3/GanHRp9a7usQxVQ9JFArMrSXe0VaVEXOGNBXdO/WyvBl18xlOadAaYEnDLPHb7hM3dwXhdw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAb97JadeOBE2QIt0DQ8M+UwAAAAACAAAAAAAQZgAAAAEAACAAAAAzAFcYxaS3Xu6B/uxk1b1uUEnRC4NTAgyDjkW3kX6LUQAAAAAOgAAAAAIAACAAAAAPOur1XGZlvypVG+9av5j//w10anwqaVR0iU4h75xMnJAAAADlz35JdjRNCQQVZFDKvPagHpFSEci057c+0uF0pIYWTZwoLTYwrXjlJhu+JHNRS8D2YLLpce8hiTAMwStf75g0OR6oGqE/EQXeLlnRANwXFtM5wZh0vsBnzh1H8iZXzInLC8RsWgTFDG/sTOq6/5Rlgom3ksjrg81tKvX++kASrW+lFSk7YffoqtG+0UKNJqRAAAAAO+Y22rwsOPXQmTrlh9y1YGuqT5Iv64PwUrdpoRDVNjp4Mg60Vknh1M9ehAs/Pm7LXDFfm2qze4azca38hTdj1w==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -42,10 +42,10 @@
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">63</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">64</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{208E540A-120A-490A-8F0D-C7F663E964F3}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{C0FA4D12-61E4-4781-B8C8-75150D2D33DB}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -78,7 +78,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Ting\Downloads\SSIS-ETL-Task\input.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Ting\Downloads\SSIS-ETL-Task\Resources\input.xlsx;Extended Properties="EXCEL 12.0 XML;HDR=YES";</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -93,7 +93,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">C:\Ting\Downloads\SSIS-ETL-Task\input.xlsx</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">C:\Ting\Downloads\SSIS-ETL-Task\Resources\input.xlsx</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -166,7 +166,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">C:\Ting\Downloads\SSIS-ETL-Task\input.xlsx</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">C:\Ting\Downloads\SSIS-ETL-Task\Resources\input.xlsx</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
